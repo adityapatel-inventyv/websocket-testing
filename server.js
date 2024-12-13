@@ -7,10 +7,9 @@ class WebSocketServerManager {
     this.app = express();
     this.server = http.createServer(this.app);
     this.wss = new WebSocketServer({ server: this.server });
-
     this.setupWebSocketConnections();
     this.startServer(port);
-    this.handleWebSocketErrors();
+    // this.handleWebSocketErrors();
   }
 
   setupWebSocketConnections() {
@@ -33,6 +32,9 @@ class WebSocketServerManager {
         }
       });
 
+      ws.on("error", (error) => {
+        console.error("WebSocket server encountered an error:", error);
+      });
       ws.on("close", () => {
         console.log("Client disconnected");
       });
