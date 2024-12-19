@@ -47,25 +47,6 @@ class WebSocketServerManager {
   }
 
 
-  getData = async (ip) => {
-    try {
-      const response = await axios.get(
-        `https://ipapi.co/${ip}/json/`,
-      );
-      return {
-        city: response.data.city || "Unknown",
-        region: response.data.region || "Unknown",
-        country: response.data.country_name || "Unknown",
-      };
-    } catch (error) {
-      return {
-        city: "Unknown",
-        region: "Unknown",
-        country: "Unknown",
-      };
-    }
-  }
-
   setupRoutes() {
     this.app.get("/traceroute", async (req, res) => {
       const target = req.query.target;
@@ -114,6 +95,11 @@ class WebSocketServerManager {
       } catch (error) {
         res.status(500).send("Error occurred during traceroute");
       }
+    });
+
+
+    this.app.get("/health-check", async (req, res) => {
+    res.json({ status: "ok" });
     });
   }
 
