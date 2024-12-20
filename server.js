@@ -24,7 +24,7 @@ class WebSocketServerManager {
       ws.on("message", (message) => {
         try {
           const parsedMessage = JSON.parse(message.toString());
-          // console.log("Received message:", parsedMessage);
+          console.log("Received message:", parsedMessage);
 
           // Broadcast received message to all clients
           this.wss.clients.forEach((client) => {
@@ -33,15 +33,15 @@ class WebSocketServerManager {
             }
           });
         } catch (error) {
-          // console.error("Error parsing message:", error);
+          console.error("Error parsing message:", error);
         }
       });
 
       ws.on("error", (error) => {
-        // console.error("WebSocket server encountered an error:", error);
+        console.error("WebSocket server encountered an error:", error);
       });
       ws.on("close", () => {
-        // console.log("Client disconnected");
+        console.log("Client disconnected");
       });
     });
   }
@@ -65,7 +65,6 @@ class WebSocketServerManager {
           })
           .on("close", async () => {
             try {
-              console.log(hops);
               
               const locationPromises = hops.map(async (hop) => {
                 try {
@@ -105,11 +104,11 @@ class WebSocketServerManager {
 
   startServer(port) {
     this.server.listen(port, () => {
-      // console.log(`WebSocket server running on port ${port}`);
+      console.log(`WebSocket server running on port ${port}`);
     });
 
     this.server.on("error", (error) => {
-      // console.error("HTTP server encountered an error:", error);
+      console.error("HTTP server encountered an error:", error);
     });
   }
 }
