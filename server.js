@@ -9,9 +9,9 @@ class WebSocketServerManager {
   constructor(port = 8080) {
     this.app = express();
     this.app.use(cors({
-      origin:  '*', // Allow requests from these origins
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      headers: ['Content-Type', 'Authorization'],
+      origin: '*', // Allow requests from all origins
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS for preflight
+      allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
     }));
     this.server = http.createServer(this.app);
     this.wss = new WebSocketServer({ server: this.server });
