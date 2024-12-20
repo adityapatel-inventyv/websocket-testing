@@ -8,8 +8,11 @@ const cors = require('cors')
 class WebSocketServerManager {
   constructor(port = 8080) {
     this.app = express();
-    this.app.use(express.json());
-    this.app.use(cors())
+    this.app.use(cors({
+      origin:  '*', // Allow requests from these origins
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      headers: ['Content-Type', 'Authorization'],
+    }));
     this.server = http.createServer(this.app);
     this.wss = new WebSocketServer({ server: this.server });
     this.setupWebSocketConnections();
