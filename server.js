@@ -58,6 +58,7 @@ class WebSocketServerManager {
 
   setupRoutes() {
     this.app.get("/traceroute", async (req, res) => {
+
       const target = req.query.target;
       const hops = [];
 
@@ -107,7 +108,9 @@ class WebSocketServerManager {
 
 
     this.app.get("/health-check", async (req, res) => {
-    res.json({ status: "ok" });
+      const publicIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      console.log(publicIp)
+    res.json({ status: "ok" ,ip: publicIp});
     });
   }
 
