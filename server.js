@@ -112,7 +112,14 @@ class WebSocketServerManager {
       console.log(publicIp)
     res.json({ status: "ok" ,ip: publicIp});
     });
+
+    app.post('/data', (req, res) => {
+      const oneMBString = '0'.repeat(4028 * 4028); // 1 MB of '0'
+      res.json({ data: oneMBString });
+    });
   }
+
+  
 
   startServer(port) {
     this.server.listen(port, () => {
