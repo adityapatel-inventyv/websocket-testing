@@ -117,6 +117,25 @@ class WebSocketServerManager {
       const oneMBString = '0'.repeat(4028 * 4028); // 1 MB of '0'
       res.json({ data: oneMBString });
     });
+
+    this.app.get('/api/down', (req, res) => {
+      const bytes = parseInt(req.query.bytes) || 100000;
+      const data = "0".repeat(bytes)
+      res.send(data);
+    });
+
+    this.app.post('/api/up', (req, res) => {
+
+      // const bytes = parseInt(req.query.bytes)
+      // console.log(req.body);
+
+      if (req.body) {
+        res.json("success")
+      }
+      else {
+        res.json("error")
+      }
+    })
   }
 
   
