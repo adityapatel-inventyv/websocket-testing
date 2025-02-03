@@ -113,14 +113,14 @@ class WebSocketServerManager {
     res.json({ status: "ok" ,ip: publicIp});
     });
 
+    const oneMBString = '0'.repeat(4028 * 4028); // 1 MB of '0'
     this.app.get('/data', (req, res) => {
-      const oneMBString = '0'.repeat(4028 * 4028); // 1 MB of '0'
       res.json({ data: oneMBString });
     });
 
+    const bytes = 4028 * 4028;
+    const data = "0".repeat(bytes)
     this.app.get('/api/down', (req, res) => {
-      const bytes = 4028 * 4028;
-      const data = "0".repeat(bytes)
       res.json(data);
     });
 
