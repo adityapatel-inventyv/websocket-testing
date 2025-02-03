@@ -119,9 +119,9 @@ class WebSocketServerManager {
     });
 
     this.app.get('/api/down', (req, res) => {
-      const bytes = parseInt(req.query.bytes) || 100000;
+      const bytes = 4028 * 4028;
       const data = "0".repeat(bytes)
-      res.send(data);
+      res.json(data);
     });
 
     this.app.post('/api/up', (req, res) => {
