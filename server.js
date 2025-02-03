@@ -11,14 +11,14 @@ class WebSocketServerManager {
     this.app.use(cors({
       origin: '*', // Allow requests from all origins
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS for preflight
-      allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
     }));
-    this.app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Access-Control-Allow-Origin');
-      next();
-    });
+    // this.app.use((req, res, next) => {
+    //   res.setHeader('Access-Control-Allow-Origin', '*');
+    //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Access-Control-Allow-Origin');
+    //   next();
+    // });
     this.server = http.createServer(this.app);
     this.wss = new WebSocketServer({ server: this.server });
     this.setupWebSocketConnections();
